@@ -10,14 +10,15 @@ You'll need to install `clang` and `make` to build this template.
 * On Windows, using [chocolatey](https://chocolatey.org/) to install both is recommended. The packages are `llvm` and `make` respectively.
   * The LLVM 19.1.0 [llvm-project](https://github.com/llvm/llvm-project) release binary, which is also what chocolatey provides, does not support MIPS correctly. The solution is to install 18.1.8 instead, which can be done in chocolatey by specifying `--version 18.1.8` or by downloading the 18.1.8 release directly.
 * On Linux, these can both be installed using your distro's package manager.
-* On MacOS, these can both be installed using Homebrew. Apple clang won't work, as you need a mips target for building the mod code.
+* On macOS, these can both be installed using Homebrew. Apple clang won't work, as you need a mips target for building the mod code.
 
-On Linux and MacOS, you'll need to also ensure that you have the `zip` utility installed.
+On Linux and macOS, you'll need to also ensure that you have the `zip` utility installed.
 
 You'll also need to build [N64Recomp](https://github.com/N64Recomp/N64Recomp) for the `RecompModTool` utility.
 
 ### Building
 * First, run `make` (with an optional job count) to build the mod code itself.
+  * On macOS, you must specify the custom clang and lld: i.e. `CC=/opt/local/bin/clang-mp-18 LD=/opt/local/bin/ld.lld-mp-18 make`
 * Next, run the `RecompModTool` utility with `mod.toml` as the first argument and the build dir (`build` in the case of this template) as the second argument.
   * This will produce your mod's `.nrm` file in the build folder.
 * Finally, compile your mod offline.
@@ -31,6 +32,10 @@ You'll also need to build [N64Recomp](https://github.com/N64Recomp/N64Recomp) fo
       On Linux, you can run:
       ```
       clang build/mod_recompiled.c -shared -fvisibility=hidden -fPIC -O2 -Ioffline_build -o build/mm_recomp_mod_template-1.0.0.so
+      ```
+       On macOS, you can run:
+      ```
+      clang build/mod_recompiled.c -shared -fPIC -O2 -Ioffline_build -o build/mm_recomp_mod_template-1.0.0.dylib
       ```
     * Make sure your mod's dynamic library and .nrm file have the same filename (besides the extension).
       * e.g. `testmod-1.0.0.nrm` and `testmod-1.0.0.dll`

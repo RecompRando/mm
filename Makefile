@@ -1,7 +1,7 @@
 BUILD_DIR := build
 
-CC      := clang
-LD      := ld.lld
+CC      ?= clang
+LD      ?= ld.lld
 TARGET  := $(BUILD_DIR)/mod.elf
 
 LDSCRIPT := mod.ld

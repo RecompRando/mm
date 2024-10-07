@@ -5,13 +5,13 @@
 
 # Unique ID of this mod. Pick something long enough that it'll never be the same as any other mod.
 # The name displayed in the mod management menu is separate from this so this doesn't need to be human readable.
-id = "mm_recomp_mod_template"
+id = "mm_recomp_randomizer"
 
 # Version of this mod.
 version = "1.0.0"
 
 # Authors of this mod.
-authors = [ "Your name here" ]
+authors = ["LittleCube", "dcvz"]
 
 # ID of the target recomp game.
 game_id = "mm"
@@ -21,15 +21,12 @@ minimum_recomp_version = "1.2.0"
 
 # Dependency mods. Each entry is the mod's ID and then an optional minimum version of the dependency mod.
 dependencies = [
-# Example dependency:
-#    "modname:1.0.0"
+  # Example dependency:
+  #    "modname:1.0.0"
 ]
 
 # Native libraries (e.g. DLLs) and the functions they export.
-native_libraries = [
-# Example native library:
-#    { name = "my_native_library", funcs = ["my_native_library_function"] }
-]
+native_libraries = [{ name = "minipelago", funcs = ["bridge_generate"] }]
 
 # Inputs to the mod tool.
 [inputs]
@@ -39,7 +36,10 @@ elf_path = "build/mod.elf"
 
 # Reference symbol files.
 func_reference_syms_file = "Zelda64RecompSyms/mm.us.rev1.syms.toml"
-data_reference_syms_files = [ "Zelda64RecompSyms/mm.us.rev1.datasyms.toml", "Zelda64RecompSyms/mm.us.rev1.datasyms_static.toml" ]
+data_reference_syms_files = [
+  "Zelda64RecompSyms/mm.us.rev1.datasyms.toml",
+  "Zelda64RecompSyms/mm.us.rev1.datasyms_static.toml",
+]
 
 # Additional files to include in the mod.
-additional_files = [ ]
+additional_files = ["build/minipelago/python"]
