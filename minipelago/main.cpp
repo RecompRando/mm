@@ -5,12 +5,17 @@
 #include <dlfcn.h>
 #include <Python.h>
 #include <filesystem>
+#include <vector>
+
+extern "C" {
 
 #ifdef _WIN32
-extern "C" DLLEXPORT u32 recomp_api_version = 1;
+DLLEXPORT u32 recomp_api_version = 1;
 #else
-extern "C" uint32_t recomp_api_version = 1;
+uint32_t recomp_api_version = 1;
 #endif
+
+}
 
 void generate() {
   auto dylib_path = get_mod_dylib_path();
